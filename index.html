@@ -1,29 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selamat Ulang Tahun!</title>
+  <title>Kejutan Ulang Tahun</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #ffe6f0;
+      color: #333;
+      text-align: center;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      font-family: sans-serif;
-      background: #ffe6e6;
-      text-align: center;
+      min-height: 100vh;
+      flex-direction: column;
     }
 
-    h1 {
-      color: #ff3366;
+    #awal, #kataKata {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
     }
 
-    #surprise {
+    #awal.active, #kataKata.active {
+      display: flex;
+    }
+
+    button {
       padding: 10px 20px;
       font-size: 1.1em;
       background-color: #ff3366;
@@ -31,37 +37,67 @@
       border-radius: 8px;
       color: white;
       cursor: pointer;
-    }
-
-    #message {
-      display: none;
       margin-top: 20px;
     }
 
-    #cake {
-      width: 200px;
+    img.kue, img.foto {
+      max-width: 250px;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      font-size: 1.2em;
+      max-width: 600px;
+      line-height: 1.6em;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <iframe src="audio-player.html" style="display:none;" allow="autoplay" id="audio-frame"></iframe>
+  <audio autoplay loop id="bgm" style="display:none">
+    <source src="musik.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
 
-  <h1>Selamat Ulang Tahun, Sayang! 🎉</h1>
-  <button id="surprise">Buka Kejutan 🎁</button>
-  <div id="message">
-    <p>Semoga harimu seindah senyummu 💖</p>
-    <p>Tiup lilinnyaa</p>
-    <img id="cake" src="https://png.pngtree.com/png-clipart/20220307/original/pngtree-cake-for-birthday-celebration-or-a-party-png-image_7422554.png" alt="Kue Ulang Tahun">
+  <div id="awal" class="active">
+    <h1>Selamat Ulang Tahun, Sayang! 🎉</h1>
+    <button id="btnSurprise">Buka Kejutan 🎁</button>
+    <div id="kejutan" style="display:none;">
+      <p>Semoga harimu seindah senyummu 💖</p>
+      <img src="https://cdn-icons-png.flaticon.com/512/869/869636.png" alt="Kue Ulang Tahun" class="kue">
+    </div>
+  </div>
+
+  <div id="kataKata">
+    <h1>Untuk Kamu yang Paling Aku Sayang 💖</h1>
+    <p>
+      Di hari istimewa ini, aku ingin kamu tahu betapa berharganya dirimu dalam hidupku.<br>
+      Terima kasih telah menjadi cahaya di setiap hariku, pelangi setelah hujan, dan pelukan paling hangat dalam hidupku.<br><br>
+      Aku tidak punya banyak hal untuk diberikan, tapi cintaku untukmu takkan pernah habis, tak peduli waktu sejauh apa kita berjalan.<br><br>
+      Selamat ulang tahun, sayangku. Semoga kebahagiaan selalu menyertaimu, seperti kamu yang selalu menyertai hatiku 💕
+    </p>
+    <img src="https://i.imgur.com/YO9X3DD.jpg" alt="Foto Berdua" class="foto">
   </div>
 
   <script>
-    document.getElementById('surprise').addEventListener('click', () => {
-      document.getElementById('message').style.display = 'block';
-      document.getElementById('surprise').style.display = 'none';
+    const btn = document.getElementById('btnSurprise');
+    const kejutan = document.getElementById('kejutan');
+    const awal = document.getElementById('awal');
+    const kataKata = document.getElementById('kataKata');
+
+    btn.addEventListener('click', () => {
+      btn.style.display = 'none';
+      kejutan.style.display = 'block';
 
       setTimeout(() => {
-        window.location.href = 'kata-kata.html';
+        awal.classList.remove('active');
+        kataKata.classList.add('active');
       }, 5000);
     });
   </script>
